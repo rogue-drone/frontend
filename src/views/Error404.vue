@@ -1,6 +1,6 @@
 <template>
-<div class="text-center">
-    <h2 class="text-6xl">Bruh 404</h2>
+<div class="columns-1">
+    <h2 class="text-6xl center">Bruh 404</h2>
 </div>
 </template>
 

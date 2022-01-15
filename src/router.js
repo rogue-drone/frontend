@@ -1,16 +1,32 @@
-import Index from './components/Index.vue'
-import {createRouter, createWebHashHistory} from "vue-router";
-import Error500 from "./components/Error500.vue";
-import Error404 from "./components/Error404.vue";
-import SrpNew from "./components/SrpNew.vue";
+import {createRouter, createWebHistory} from "vue-router";
+import Error500 from "./views/Error500.vue";
+import Error404 from "./views/Error404.vue";
+import SrpNew from "./views/SrpNew.vue";
+import Index from './views/Index.vue'
+import Guild from "./views/Guild.vue";
 
-// 2. Define some routes
-// Each route should map to a component.
-// We'll talk about nested routes later.
+const authUrl = import.meta.env.VITE_APP_API_URL + '/auth/connect'
+const botConnect = import.meta.env.VITE_APP_API_URL + '/bot/connect'
+
 const routes = [
     { path: '/', component: Index },
+    { path: '/guild', component: Guild },
     { path: '/srp/new', component: SrpNew },
     { path: '/error', component: Error500 },
+    {
+        path: '/connect',
+        component: Index,
+        beforeEnter(to, from, next) {
+            window.location.href = authUrl
+        }
+    },
+    {
+        path: '/bot',
+        component: Index,
+        beforeEnter(to, from, next) {
+            window.location.href = botConnect
+        }
+    },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: Error404 },
 ]
 
@@ -19,7 +35,7 @@ const routes = [
 // keep it simple for now.
 const router = createRouter({
     // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes, // short for `routes: routes`
 })
 
