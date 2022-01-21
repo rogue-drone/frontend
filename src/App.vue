@@ -9,7 +9,7 @@ import * as Sentry from "@sentry/vue";
 
 onErrorCaptured((err) => {
     Sentry.captureException(err)
-    router.push('error')
+    router.push('/error')
 })
 
 onMounted(() => {
