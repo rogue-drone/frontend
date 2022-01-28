@@ -21,7 +21,7 @@ const routes = [
         }
     },
     {
-        path: '/bot',
+        path: '/guild/new',
         component: Index,
         beforeEnter(to, from, next) {
             window.location.href = botConnect

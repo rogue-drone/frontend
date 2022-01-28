@@ -31,7 +31,7 @@ export default {
 </script>
 
 <template>
-  <label :for="id" class="block h-64 relative overflow-hidden rounded-lg border-base-content border-2">
+  <label :for="id" class="block h-64 relative overflow-hidden rounded-lg border-base-300 border">
     <!--
     * The input has an "overlayed" class which we define using @apply in the style block below
     * This ensures that no matter where you drag inside of the "drop zone" the default browser behavior for file inputs will kick in and assign that file(s) to the input
@@ -41,16 +41,16 @@ export default {
         :id="id"
         :multiple="multiple ? 'multiple' : null"
         @change="handleUpload"
-        class="overlayed"
+        class="visi"
         type="file"
     />
     <!-- This is where we do the fancy styling with Tailwind CSS and transform this thing from a normal file input to a nicely styled drag and drop dropzone-->
 
     <!-- The pointer-events-none class here is very important as it allows our drags and clicks to pass through to the input underneath -->
     <span
-        :class="`overlayed bg-${color}-100 border-${color}-200 border-2 text-${color}-800 pointer-events-none flex justify-center items-center`"
+        :class="`overlayed bg-${color}-100 border-${color}-300 border text-${color}-800 pointer-events-none`"
     >
-      <div class="text-center">
+      <span class="text-center">
         <!-- Let's use a slot here to make our component a little more flexible (maybe the end developer would live to add an icon in there, etc) -->
         <slot>
           <strong>Upload File</strong>
@@ -68,7 +68,7 @@ export default {
             {{ uploadInfo }}
           </slot>
         </small>
-      </div>
+      </span>
     </span>
   </label>
 </template>
@@ -76,6 +76,19 @@ export default {
 <style scoped>
 /* Finally we use Tailwind CSS to create our overlayed class */
 .overlayed {
-  @apply absolute top-0 left-0 right-0 bottom-0 w-full h-full block bg-base-200;
+  @apply  absolute
+          top-0
+          left-0
+          right-0
+          bottom-0
+          w-full
+          h-full
+          grid
+          bg-base-100
+          grid-flow-col
+          auto-cols-max
+          auto-rows-max
+          content-center
+          justify-center;
 }
 </style>

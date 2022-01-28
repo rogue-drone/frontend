@@ -1,6 +1,6 @@
 <template>
   <div class="columns-1">
-    <div class="card flex-shrink-0 w-full shadow-2xl">
+    <div class="card flex-shrink-0 w-full shadow-2xl bg-base-100">
       <div class="card-body">
         <div class="card-title">New SRP Request</div>
         <form ref="srp">
@@ -60,11 +60,19 @@
             </select>
           </div>
 
-          <div class="form-control w-full max-w-xs h-200 rounded-box border-neutral">
-            <label class="label">
-              <span class="label-text">Screenshots</span>
+          <div class="form-control w-full max-w-xs">
+            <div class="shrink-0">
+            </div>
+            <label class="block">
+              <span class="sr-only">Choose profile photo</span>
+              <input type="file" class="block w-full text-sm text-slate-500
+      file:mr-4 file:py-2 file:px-4
+      file:rounded-full file:border-0
+      file:text-sm file:font-semibold
+      file:bg-violet-50 file:text-violet-700
+      hover:file:bg-violet-100
+    "/>
             </label>
-            <file-uploader id="screenshots" />
           </div>
         </form>
       </div>
