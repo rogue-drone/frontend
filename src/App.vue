@@ -74,7 +74,7 @@ export default {
       )
     },
     connectBot() {
-      this.$router.push('/guild/new');
+      this.$router.push('/guilds/connect');
     }
   },
   computed: {

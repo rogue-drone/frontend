@@ -1,6 +1,6 @@
 <template>
   <div class="columns-1">
-    <div class="card flex-shrink-0 w-full shadow-2xl bg-base-100">
+    <div class="card flex-shrink-0 shadow-2xl bg-base-100">
       <div class="card-body">
         <div class="card-title">New SRP Request</div>
         <form ref="srp">

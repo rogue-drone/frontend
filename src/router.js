@@ -4,6 +4,7 @@ import Error404 from "./views/Error404.vue";
 import SrpNew from "./views/SrpNew.vue";
 import Index from './views/Index.vue'
 import Guild from "./views/Guild.vue";
+import Connect from "./views/Connect.vue";
 
 const authUrl = import.meta.env.VITE_APP_API_URL + '/auth/connect'
 const botConnect = import.meta.env.VITE_APP_API_URL + '/bot/connect'
@@ -21,11 +22,8 @@ const routes = [
         }
     },
     {
-        path: '/guild/new',
-        component: Index,
-        beforeEnter(to, from, next) {
-            window.location.href = botConnect
-        }
+        path: '/guilds/connect',
+        component: Connect
     },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: Error404 },
 ]

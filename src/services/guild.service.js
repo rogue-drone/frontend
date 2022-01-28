@@ -1,21 +1,14 @@
-import axios from 'axios';
-import authHeader from "./auth.header";
-import Cookies from "js-cookie";
+import ApiClient from "./api.client";
 
 const API_URL = import.meta.env.VITE_APP_API_URL;
 
 class GuildService {
     getGuilds() {
-        return axios
-            .get(API_URL + '/api/guild', {
-                headers: authHeader()
-            })
-            .catch(error => {
-                Sentry.captureException(error);
-            })
-            .then(response => {
-                return response.data;
-            });
+        return ApiClient.get(API_URL + '/api/guild');
+    }
+
+    getConnectable() {
+        return ApiClient.get(API_URL + '/api/guild/connectable');
     }
 }
 
