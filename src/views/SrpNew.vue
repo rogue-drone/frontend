@@ -61,17 +61,14 @@
           </div>
 
           <div class="form-control w-full max-w-xs">
+            <label class="label">
+              <span class="label-text">Screenshots</span>
+            </label>
             <div class="shrink-0">
             </div>
             <label class="block">
               <span class="sr-only">Choose profile photo</span>
-              <input type="file" class="block w-full text-sm text-slate-500
-      file:mr-4 file:py-2 file:px-4
-      file:rounded-full file:border-0
-      file:text-sm file:font-semibold
-      file:bg-violet-50 file:text-violet-700
-      hover:file:bg-violet-100
-    "/>
+              <input type="file" class="upload-screenshot" multiple/>
             </label>
           </div>
         </form>
@@ -103,5 +100,18 @@ export default {
 </script>
 
 <style scoped>
-
+.upload-screenshot {
+  @apply  block
+          w-full
+          text-sm
+          file:mr-4
+          file:py-2
+          file:px-4
+          file:rounded-lg
+          file:border-0
+          file:font-semibold
+          file:btn
+          file:btn-primary
+          file:btn-sm;
+}
 </style>
