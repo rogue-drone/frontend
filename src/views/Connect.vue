@@ -1,38 +1,29 @@
 <template>
-  <div class="columns-4 h-auto">
+  <div class="card shadow hover:shadow-2xl compact side bg-base-100" v-for="guild in connectable">
+    <div class="flex-row items-center space-x-4 card-body">
+      <div>
+        <DiscordImage type="guild" :guild="guild" class="w-12 h-12"/>
+      </div>
+      <div class="w-full">
+        <h2 class="card-title text-left">{{ guild.name }}</h2>
+        <div class="justify-end card-actions">
+          <button class="btn btn-outline btn-primary" @click="connect(guild)" v-if="!isConnected(guild)">Connect</button>
+          <button class="btn btn-ghost hover:bg-transparent focus:bg-transparent no-animation" v-else>Connected</button>
+        </div>
+      </div>
 
-    <div class="card text-center shadow-2xl" v-for="guild in guilds">
-      <figure class="px-10 pt-10 w-2 h-auto">
-        <img :src="guild.icon" class="rounded">
-      </figure>
-      <div class="card-body">
-        <h2 class="card-title">shadow, center, padding</h2>
-        <p>Rerum reiciendis beatae tenetur excepturi aut pariatur est eos. Sit sit necessitatibus veritatis sed
-          molestiae voluptates incidunt iure sapiente.</p>
-        <div class="justify-center card-actions">
-          <button class="btn btn-outline btn-accent">More info</button>
-        </div>
-      </div>
-    </div>
-    <div class="card text-center shadow-2xl" >
-      <figure class="px-10 pt-10 w-2 h-auto">
-        <img src="https://picsum.photos/id/1005/400/250" class="rounded-xl">
-      </figure>
-      <div class="card-body">
-        <h2 class="card-title">shadow, center, padding</h2>
-        <p>Rerum reiciendis beatae tenetur excepturi aut pariatur est eos. Sit sit necessitatibus veritatis sed
-          molestiae voluptates incidunt iure sapiente.</p>
-        <div class="justify-center card-actions">
-          <button class="btn btn-outline btn-accent">More info</button>
-        </div>
-      </div>
     </div>
   </div>
 </template>
 
 <script>
+import DiscordImage from "../components/DiscordImage.vue";
+
 export default {
   name: "Connect",
+  components: {
+    DiscordImage
+  },
   mounted() {
     this.$store.dispatch('guild/getConnectable');
   },
@@ -40,8 +31,22 @@ export default {
     this.$store.dispatch('guild/clearConnectable')
   },
   computed: {
-    guilds() {
+    connectable() {
       return this.$store.getters['guild/connectable'];
+    },
+    guilds() {
+      return this.$store.getters['guild/guilds'];
+    }
+  },
+  methods: {
+    connect(guild) {
+      this.$router.push('/guilds/connect/'+guild.id)
+    },
+    isConnected(connectable) {
+
+      const connected = this.guilds.find(guild => parseInt(guild.discordId) === connectable.id)
+
+      return connected !== undefined;
     }
   }
 }
