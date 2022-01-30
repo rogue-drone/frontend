@@ -41,9 +41,9 @@ export default {
         objectHasImage() {
             switch (this.type) {
                 case 'user':
-                    return this.user.avatar !== null;
+                    return !this.user.avatar.includes('/.webp');
                 case 'guild':
-                   return this.guild.icon !== null;
+                   return !this.guild.icon.includes('/.webp');
             }
         },
         firstLetter() {
@@ -59,10 +59,10 @@ export default {
 
             switch (this.type) {
                 case 'user':
-                    image = this.DISCORD_CDN_URI + 'avatars/' + this.user.id + '/' + this.user.avatar + '.png';
+                    image = this.user.avatar;
                     break;
                 case 'guild':
-                    image = this.DISCORD_CDN_URI + 'icons/' + this.guild.id + '/' + this.guild.icon + '.png';
+                    image = this.guild.icon;
                     break;
             }
 

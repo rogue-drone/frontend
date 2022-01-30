@@ -15,13 +15,15 @@ onErrorCaptured((err) => {
 onMounted(() => {
   store.dispatch('auth/login').then(
       (data) => {
-        store.dispatch('guild/getGuilds');
-        store.dispatch('app/setLoaded');
+        store.dispatch('guild/getGuilds').then(() => {
+          store.dispatch('app/setLoaded');
+        });
 
       },
       (error) => {
+        console.log(error);
         Sentry.captureException(error)
-        router.push('error')
+        router.push('/')
       }
   )
 })
@@ -118,9 +120,13 @@ export default {
     <div class="flex-none px-2 mx-2">
       <router-link
           to="/"
-          class="btn btn-ghost no-animation font-bold hover:bg-transparent focus:bg-transparent"
+          class="btn btn-ghost no-animation font-bold hover:bg-transparent focus:bg-transparent p-0"
       >
-        <div class="">Rogue drone</div>
+        <div class="avatar">
+          <div class="rounded-full w-12 h-12">
+            <img :src="logo" alt="ROGUE DRONE">
+          </div>
+        </div>
       </router-link>
 
     </div>
@@ -165,7 +171,7 @@ export default {
       </div>
     </div>
     <div class="flex-none" v-if="!loggedIn">
-      <a @click="login" class="btn   btn-round btn-discord">
+      <a @click="login" class="btn btn-round btn-discord">
         <div class="hidden lg:block">Connect with</div>
         <IconDiscord class="inline-block ml-2 w-6 h-6 stroke-current"/>
       </a>
@@ -191,7 +197,5 @@ export default {
       </div>
     </div>
   </div>
-  <div class="container mx-auto col-span-1 md:col-span-3 lg:col-span-4">
-    <router-view/>
-  </div>
+  <router-view/>
 </template>
