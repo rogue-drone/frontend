@@ -44,7 +44,7 @@ export default {
     },
     isConnected(connectable) {
 
-      const connected = this.guilds.find(guild => parseInt(guild.discordId) === connectable.id)
+      const connected = this.guilds.find(guild => guild.discordId === connectable.id)
 
       return connected !== undefined;
     }

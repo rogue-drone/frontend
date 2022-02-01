@@ -27,9 +27,9 @@ const routes = [
     },
     {
         path: '/guilds/connect/:id',
-        component: Index,
+        component: Connect,
         beforeEnter(to, from, next) {
-            window.location.href = botConnect + '?guild_id=' + to.params.id
+            window.location.href = botConnect + '/' + to.params.id
         }
     },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: Error404 },
